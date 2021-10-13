@@ -1,9 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { addImage, fetchImages } from './utils/smart_contract.util';
 import { uploadImageAndGenerateHash } from './utils/upload_image_generate_hash.util';
 
 const App = () => {
-  const [imageUrl, setImageUrl] = useState<string>('');
   const [imageFile, setImageFile] = useState<File>();
+
+  useEffect(() => {
+    fetchImages()
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const onFileUploadChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -16,8 +24,9 @@ const App = () => {
     try {
       if (imageFile) {
         const hash = await uploadImageAndGenerateHash(imageFile);
-
-        setImageUrl(`https://gateway.pinata.cloud/ipfs/${hash}`);
+        await addImage(hash);
+        const data = await fetchImages();
+        console.log(data);
       }
     } catch (error) {
       console.log(error);
@@ -34,7 +43,6 @@ const App = () => {
         onChange={onFileUploadChange}
       />
       <button onClick={onImageUpload}>Upload</button>
-      {imageUrl.length > 0 && <img alt='IPFS File' src={imageUrl} />}
     </div>
   );
 };
