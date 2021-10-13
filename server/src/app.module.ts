@@ -1,7 +1,8 @@
+import { PinataModule } from './modules/pinata/pinata.module';
 import { Module } from '@nestjs/common';
 
 @Module({
-  imports: [],
+  imports: [PinataModule],
   controllers: [],
   providers: [],
 })
