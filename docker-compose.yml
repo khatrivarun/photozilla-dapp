@@ -22,7 +22,7 @@ services:
       dockerfile: Dockerfile
     container_name: photozilla_server
     env_file:
-      - server.env
+      - server-config.env
     ports:
       - '5000:5000'
     volumes:
