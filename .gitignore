@@ -2,3 +2,4 @@
 **/dist
 .vscode/
 server-config.env
+server/images
