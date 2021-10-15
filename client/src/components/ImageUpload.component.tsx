@@ -24,17 +24,17 @@ export const ImageUpload: React.FunctionComponent<ImageUploadProps> = ({
   };
 
   const onImageUpload = async () => {
-    setLoading(true);
-    try {
-      if (imageFile) {
-        const hash = await uploadImageAndGenerateHash(imageFile);
+    if (localImageUrl.length > 0) {
+      setLoading(true);
+      try {
+        const hash = await uploadImageAndGenerateHash(imageFile!);
         await addImage(hash);
         await refreshImages();
 
         setLocalImageUrl('');
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
     setLoading(false);
   };
