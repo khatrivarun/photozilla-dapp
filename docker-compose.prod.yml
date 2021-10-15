@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  photozilla:
+    build:
+      context: .
+      dockerfile: prod.Dockerfile
+    container_name: prod_photozilla
+    env_file:
+      - server-config.env
+    ports:
+      - '5000:5000'
+    networks:
+      - photozilla_prod_net
+
+networks:
+  photozilla_prod_net:
+    name: photozilla_prod_net

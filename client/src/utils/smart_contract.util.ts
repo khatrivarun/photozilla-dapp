@@ -2,7 +2,7 @@ import { ethers } from 'ethers';
 import { Image as ImageModel } from '../models/image.model';
 import Image from './../artifacts/contracts/Image.sol/Image.json';
 
-const imageAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
+const imageAddress = '0xA7f87CD4b3AFc002aa8e6ca71a6E66A53Df50451';
 
 export const requestAccount = async () => {
   if (typeof window.ethereum !== 'undefined') {
