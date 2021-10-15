@@ -3,3 +3,6 @@
 .vscode/
 server-config.env
 server/images
+client/src/artifacts/contracts/Image.sol/Image.dbg.json
+client/cache/solidity-files-cache.json
+client/src/artifacts/build-info/ae4b3d818d4d71e5a0e48ec6bbc5d9fb.json
