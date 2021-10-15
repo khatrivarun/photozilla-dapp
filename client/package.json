@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://photozilla_server:5000/",
+  "proxy": "http://localhost:5000/",
   "dependencies": {
     "@chakra-ui/react": "^1.6.9",
     "@emotion/react": "^11.4.1",
