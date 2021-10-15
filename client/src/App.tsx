@@ -1,5 +1,6 @@
 import { Spinner, Center } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import { Header } from './components/Header.component';
 import { ImageList } from './components/ImageList.component';
 import { ImageUpload } from './components/ImageUpload.component';
 import { Image } from './models/image.model';
@@ -26,7 +27,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Hello From React!!</h1>
+      <Header />
       <ImageUpload refreshImages={refreshImages} />
       <Center>
         {loading ? <Spinner size='xl' /> : <ImageList images={images} />}
