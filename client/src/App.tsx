@@ -1,48 +1,37 @@
+import { Spinner, Center } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { addImage, fetchImages } from './utils/smart_contract.util';
-import { uploadImageAndGenerateHash } from './utils/upload_image_generate_hash.util';
+import { Header } from './components/Header.component';
+import { ImageList } from './components/ImageList.component';
+import { ImageUpload } from './components/ImageUpload.component';
+import { Image } from './models/image.model';
+import { fetchImages } from './utils/smart_contract.util';
 
 const App = () => {
-  const [imageFile, setImageFile] = useState<File>();
+  const [images, setImages] = useState<Image[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     fetchImages()
       .then((data) => {
-        console.log(data);
+        setImages(data);
       })
       .catch((error) => console.log(error));
+    setLoading(false);
   }, []);
 
-  const onFileUploadChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      const selectedImage = event.target.files[0];
-      setImageFile(selectedImage);
-    }
-  };
-
-  const onImageUpload = async () => {
-    try {
-      if (imageFile) {
-        const hash = await uploadImageAndGenerateHash(imageFile);
-        await addImage(hash);
-        const data = await fetchImages();
-        console.log(data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const refreshImages = async () => {
+    const data = await fetchImages();
+    setImages(data);
   };
 
   return (
     <div>
-      <h1>Hello From React!!</h1>
-      <input
-        type='file'
-        name='image'
-        id='image'
-        onChange={onFileUploadChange}
-      />
-      <button onClick={onImageUpload}>Upload</button>
+      <Header />
+      <ImageUpload refreshImages={refreshImages} />
+      <Center>
+        {loading ? <Spinner size='xl' /> : <ImageList images={images} />}
+      </Center>
     </div>
   );
 };
