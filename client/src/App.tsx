@@ -1,3 +1,4 @@
+import { Spinner, Center } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { ImageList } from './components/ImageList.component';
 import { Image } from './models/image.model';
@@ -49,7 +50,9 @@ const App = () => {
         onChange={onFileUploadChange}
       />
       <button onClick={onImageUpload}>Upload</button>
-      {loading ? <h1>Loading</h1> : <ImageList images={images} />}
+      <Center>
+        {loading ? <Spinner size='xl' /> : <ImageList images={images} />}
+      </Center>
     </div>
   );
 };
