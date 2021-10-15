@@ -1,0 +1,24 @@
+
+name: Heroku Docker Deploy
+on:
+  pull_request:
+    branches: [dev]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Log In To Heroku Container Registry
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
+      - name: Building The Production Image
+        run: docker build -f prod.Dockerfile -t registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web .
+      - name: Pushing The Image To Heroku Container Registry
+        run: docker push registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web
+      - name: Releasing The New Version In Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release --app ${{ secrets.HEROKU_APP_NAME }} web
