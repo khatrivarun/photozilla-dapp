@@ -1,8 +1,7 @@
-
 name: Heroku Docker Deploy
 on:
   pull_request:
-    branches: [dev]
+    branches: [master]
   workflow_dispatch:
 
 jobs:
