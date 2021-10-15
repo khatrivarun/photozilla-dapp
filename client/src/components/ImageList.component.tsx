@@ -13,7 +13,7 @@ export const ImageList: React.FunctionComponent<ImageListProps> = ({
   return (
     <Flex direction='column' align='center' justify='center'>
       {images.map((image) => (
-        <ImageDisplay key={image.imgHash} image={image} />
+        <ImageDisplay key={Math.random().toString()} image={image} />
       ))}
     </Flex>
   );

@@ -23,8 +23,6 @@ export const ImageDisplay: React.FunctionComponent<ImageDisplayProps> = ({
             fontSize={{
               base: 'xx-small',
               md: 'sm',
-              lg: 'sm',
-              xl: 'sm',
             }}
             fontWeight='bold'
           >
